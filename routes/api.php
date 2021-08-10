@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::middleware(['token'])->group(function () {
+        Route::apiResource('authentication', \App\Http\Controllers\Api\v1\AuthenticationController::class)->withoutMiddleware(['token']);
+        Route::apiResource('user', \App\Http\Controllers\Api\v1\UserController::class);
+    });
 });
