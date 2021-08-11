@@ -1,0 +1,332 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "aysEcommerce Api",
+        "version": "0.0.2.6"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/v1/"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get list of users",
+                "operationId": "87996f7841594e5eb28c91748985ae03",
+                "parameters": [
+                    {
+                        "name": "page_index",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": "0"
+                        }
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": "10"
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "id"
+                        }
+                    },
+                    {
+                        "name": "order_type",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "asc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "Users skipped 0 and take 10"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "response": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UsersResponseSchema"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create new user",
+                "operationId": "67ab3c6d0b1464019fbcd1d5ee3f1501",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "User saved successfully"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "response": {
+                                            "$ref": "#/components/schemas/UsersResponseSchema"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/show": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user informations",
+                "operationId": "c7266e05554e349fa6f282a8e8398a6a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "Get user informations"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "response": {
+                                            "$ref": "#/components/schemas/UsersResponseSchema"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user",
+                "operationId": "ec21f39ec9b38a05f6dc6881a9f7dc54",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "User saved successfully"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "response": {
+                                            "$ref": "#/components/schemas/UsersResponseSchema"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/delete": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete user",
+                "operationId": "f649232a03a4e9f95b351c11b179d9fb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "User deleted successfully"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UsersResponseSchema": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

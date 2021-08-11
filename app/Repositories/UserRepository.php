@@ -52,8 +52,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function update(UserUpdateRequest $request)
     {
+        if (!$user = User::find($request->id)) return $this->error('User not found', 404);
         return $this->success('User saved successfully', $this->save(
-            User::find($request->id),
+            $user,
             $request->name,
             $request->email,
             $request->password
