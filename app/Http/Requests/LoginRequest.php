@@ -25,6 +25,7 @@ class LoginRequest extends LaravelFormRequest
         return [
             'email.required' => 'email is required',
             'password.required' => 'password is required',
+            'model.required' => 'model is required',
         ];
     }
 
@@ -37,7 +38,8 @@ class LoginRequest extends LaravelFormRequest
     {
         return [
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'model' => 'required',
         ];
     }
 

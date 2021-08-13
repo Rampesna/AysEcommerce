@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Authorized;
 use App\Http\Middleware\Token;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'token' => Token::class,
+        'authorized' => Authorized::class,
     ];
 }

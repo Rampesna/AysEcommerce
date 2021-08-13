@@ -8,18 +8,20 @@ use App\Http\Requests\UserShowRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Interfaces\UserRepositoryInterface;
-use App\Traits\CheckMethod;
 use Illuminate\Routing\Controller;
 use \App\Traits\Response;
 
 class UserController extends Controller
 {
-    use Response, CheckMethod;
+    use Response;
 
     private $userInterface;
 
     public function __construct(UserRepositoryInterface $userInterface)
     {
+        $this->middleware('authorized:1')->only([
+            'index'
+        ]);
         $this->userInterface = $userInterface;
     }
 

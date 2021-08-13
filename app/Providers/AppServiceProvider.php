@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\AuthenticatedComposer;
+use App\Http\View\Composers\OptionsComposer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('*', AuthenticatedComposer::class);
+        View::composer('*', OptionsComposer::class);
     }
 }
