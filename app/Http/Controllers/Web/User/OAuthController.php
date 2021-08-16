@@ -3,21 +3,23 @@
 namespace App\Http\Controllers\Web\User;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\OAuthRepositoryInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OAuthController extends Controller
 {
+    private $oAuthInterface;
+
+    public function __construct(OAuthRepositoryInterface $oAuthInterface)
+    {
+        $this->oAuthInterface = $oAuthInterface;
+    }
+
     public function index(Request $request)
     {
-        $user = User::where('token', $request->token)->first();
-
-        if (!$user) return redirect()->route('user.login.index');
-
-        Auth::login($user);
-
-        return redirect()->route('user.dashboard.index');
+        return $this->oAuthInterface->index($request);
     }
 
     /**

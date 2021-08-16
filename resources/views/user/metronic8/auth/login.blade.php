@@ -1,10 +1,10 @@
-@extends('user.' . $options->theme . '.layouts.authentication')
+@extends('user.' . theme() . '.layouts.authentication')
 
 @section('content')
 
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <a class="mb-12">
-            <img alt="Logo" src="{{ asset('user/' . $options->theme . '/media/logos/logo-2-dark.svg') }}" class="h-45px" />
+            <img alt="Logo" src="{{ asset('user/' . theme() . '/media/logos/logo-2-dark.svg') }}" class="h-45px" />
         </a>
         <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
             <div class="form w-100">

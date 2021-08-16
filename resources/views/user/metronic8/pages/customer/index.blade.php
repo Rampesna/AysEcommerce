@@ -1,4 +1,4 @@
-@extends('user.' . $options->theme . '.layouts.master')
+@extends('user.' . theme() . '.layouts.master')
 @section('title', __('user/customer.page-title'))
 @php(setlocale(LC_ALL, 'tr_TR.UTF-8'))
 

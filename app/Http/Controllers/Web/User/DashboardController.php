@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.dashboard.index');
+        return view('user.' . theme() . '.pages.dashboard.index');
     }
 
     /**

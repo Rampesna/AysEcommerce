@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.product.index');
+        return view('user.' . theme() . '.pages.product.index');
     }
 
     /**

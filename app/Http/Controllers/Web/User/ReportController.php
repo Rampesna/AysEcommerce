@@ -14,7 +14,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.report.index');
+        return view('user.' . theme() . '.pages.report.index');
     }
 
     /**

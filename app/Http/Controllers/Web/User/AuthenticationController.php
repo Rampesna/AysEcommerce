@@ -14,8 +14,8 @@ class AuthenticationController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) return view('user.' . $this->options->theme . '.pages.dashboard.index');
-        return view('user.' . $this->options->theme . '.auth.login');
+        if (auth()->check()) return view('user.' . theme() . '.pages.dashboard.index');
+        return view('user.' . theme() . '.auth.login');
     }
 
     /**

@@ -11,11 +11,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    protected $options;
-
-    public function __construct()
-    {
-        $this->options = Option::find(1);
-    }
 }

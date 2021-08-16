@@ -11,10 +11,10 @@
     @yield('meta')
 
     <link rel="canonical" href=""/>
-    <link rel="shortcut icon" href="{{ asset('user/' . $options->theme . '/media/logos/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('user/' . theme() . '/media/logos/favicon.ico') }}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-    <link href="{{ asset('user/' . $options->theme . '/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('user/' . $options->theme . '/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('user/' . theme() . '/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('user/' . theme() . '/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
 
     @stack('before-styles')
 
@@ -31,17 +31,15 @@
 <div class="d-flex flex-column flex-root">
     <div class="page d-flex flex-row flex-column-fluid">
         <div id="kt_aside" class="aside pb-5 pt-5 pt-lg-0">
-            @include('user.' . $options->theme . '.layouts.aside')
-            @include('user.' . $options->theme . '.layouts.aside-footer')
+            @include('user.' . theme() . '.layouts.aside')
+            @include('user.' . theme() . '.layouts.aside-footer')
         </div>
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
             <div id="kt_header" style="" class="header align-items-stretch">
 
             </div>
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <div id="kt_content_container" class="container">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
 
             <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
@@ -58,8 +56,8 @@
 
 @stack('before-scripts')
 
-<script src="{{ asset('user/' . $options->theme . '/plugins/global/plugins.bundle.js') }}"></script>
-<script src="{{ asset('user/' . $options->theme . '/js/scripts.bundle.js') }}"></script>
+<script src="{{ asset('user/' . theme() . '/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('user/' . theme() . '/js/scripts.bundle.js') }}"></script>
 
 @stack('after-scripts')
 

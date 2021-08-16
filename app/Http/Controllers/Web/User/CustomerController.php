@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.customer.index');
+        return view('user.' . theme() . '.pages.customer.index');
     }
 
     /**

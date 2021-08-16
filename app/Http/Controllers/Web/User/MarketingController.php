@@ -14,7 +14,7 @@ class MarketingController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.marketing.index');
+        return view('user.' . theme() . '.pages.marketing.index');
     }
 
     /**

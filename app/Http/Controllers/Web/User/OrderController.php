@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.order.index');
+        return view('user.' . theme() . '.pages.order.index');
     }
 
     /**

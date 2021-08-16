@@ -14,7 +14,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('user.' . $this->options->theme . '.pages.setting.index');
+        return view('user.' . theme() . '.pages.setting.index');
     }
 
     /**
