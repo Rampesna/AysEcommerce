@@ -15,6 +15,7 @@ class CreateProductVariantOptionsTable extends Migration
     {
         Schema::create('product_variant_options', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('product_id')->unsigned();
             $table->text('variant')->unique();
             $table->double('amount');
             $table->text('sku')->unique();

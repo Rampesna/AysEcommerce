@@ -15,7 +15,8 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->string('theme')->unique();
+            $table->string('theme');
+            $table->string('customer_theme');
         });
     }
 

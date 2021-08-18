@@ -34,4 +34,14 @@ class Customer extends Authenticatable
         'deleted_at',
         'email_verified_at'
     ];
+
+    public function token()
+    {
+        return $this->token;
+    }
+
+    public function cart()
+    {
+        return null;
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use App\Traits\Response;
@@ -35,9 +35,9 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param UserStoreRequest $request
+     * @param StoreRequest $request
      */
-    public function store(UserStoreRequest $request)
+    public function store(StoreRequest $request)
     {
         return $this->success('User saved successfully', $this->save(
             new User,
@@ -48,9 +48,9 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param UserUpdateRequest $request
+     * @param UpdateRequest $request
      */
-    public function update(UserUpdateRequest $request)
+    public function update(UpdateRequest $request)
     {
         if (!$user = User::find($request->id)) return $this->error('User not found', 404);
         return $this->success('User saved successfully', $this->save(
@@ -68,7 +68,7 @@ class UserRepository implements UserRepositoryInterface
      * @param string $password
      */
     public function save(
-        User $user,
+        User   $user,
         string $name,
         string $email,
         string $password = null

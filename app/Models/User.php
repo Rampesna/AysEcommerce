@@ -35,6 +35,11 @@ class User extends Authenticatable
         'email_verified_at'
     ];
 
+    public function token()
+    {
+        return $this->token;
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

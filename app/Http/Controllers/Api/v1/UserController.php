@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\UserDeleteRequest;
-use App\Http\Requests\UserIndexRequest;
-use App\Http\Requests\UserShowRequest;
-use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Interfaces\UserRepositoryInterface;
+use App\Traits\Response;
 use Illuminate\Routing\Controller;
-use \App\Traits\Response;
+use App\Http\Requests\User\DeleteRequest;
+use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\User\ShowRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
+use App\Interfaces\UserRepositoryInterface;
 
 class UserController extends Controller
 {
@@ -28,9 +28,9 @@ class UserController extends Controller
     /**
      * @method get
      * @url {version}/user
-     * @param UserIndexRequest $request
+     * @param IndexRequest $request
      */
-    public function index(UserIndexRequest $request)
+    public function index(IndexRequest $request)
     {
         if (!$this->checkMethod($request, ['get'])) return $this->error('Method not allowed', 405);
         return $this->userInterface->index(
@@ -44,9 +44,9 @@ class UserController extends Controller
     /**
      * @method get
      * @url {version}/user/show
-     * @param UserShowRequest $request
+     * @param ShowRequest $request
      */
-    public function show(UserShowRequest $request)
+    public function show(ShowRequest $request)
     {
         if (!$this->checkMethod($request, ['get', 'head'])) return $this->error('Method not allowed', 405);
         return $this->userInterface->show($request->id);
@@ -55,9 +55,9 @@ class UserController extends Controller
     /**
      * @method post
      * @url {version}/user
-     * @param UserStoreRequest $request
+     * @param StoreRequest $request
      */
-    public function store(UserStoreRequest $request)
+    public function store(StoreRequest $request)
     {
         if (!$this->checkMethod($request, ['post'])) return $this->error('Method not allowed', 405);
         return $this->userInterface->store($request);
@@ -66,9 +66,9 @@ class UserController extends Controller
     /**
      * @method put
      * @url {version}/user
-     * @param UserUpdateRequest $request
+     * @param UpdateRequest $request
      */
-    public function update(UserUpdateRequest $request)
+    public function update(UpdateRequest $request)
     {
         if (!$this->checkMethod($request, ['put'])) return $this->error('Method not allowed', 405);
         return $this->userInterface->update($request);
@@ -77,9 +77,9 @@ class UserController extends Controller
     /**
      * @method delete
      * @url {version}/user/delete
-     * @param UserDeleteRequest $request
+     * @param DeleteRequest $request
      */
-    public function destroy(UserDeleteRequest $request)
+    public function destroy(DeleteRequest $request)
     {
         if (!$this->checkMethod($request, ['delete'])) return $this->error('Method not allowed', 405);
         return $this->userInterface->destroy($request->id);

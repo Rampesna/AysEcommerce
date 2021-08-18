@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->longText('more_info')->nullable();
             $table->text('tags')->nullable();
+            $table->double('price')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

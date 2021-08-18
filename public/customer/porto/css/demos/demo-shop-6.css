@@ -2604,9 +2604,9 @@ h2.word-rotator-title .word-rotate {
 }
 .product .product-quickview {
 	position: absolute;
-	right: 0;
+	left: 0;
 	top: 0;
-	background-color: #0088CC;
+	background-color: #be2626;
 	color: #fff;
 	padding: 10px;
 	z-index: 9;

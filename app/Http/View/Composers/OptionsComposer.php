@@ -9,7 +9,7 @@ class OptionsComposer
 {
     /**
      *
-     * @var object $authenticated
+     * @var object $options
      */
     protected $options;
 

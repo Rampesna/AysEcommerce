@@ -10,8 +10,18 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function attributes()
+    public function variants()
     {
-        return $this->hasMany(Attribute::class, 'products_attributes_options');
+        return $this->morphToMany(Variant::class, 'variant_relation');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'relation');
+    }
+
+    public function variantOptions()
+    {
+        return $this->hasMany(ProductVariantOption::class);
     }
 }

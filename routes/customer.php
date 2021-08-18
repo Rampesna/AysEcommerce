@@ -13,14 +13,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('test', function () {
-    return bcrypt('123456');
-});
-
-Route::group([
-    'as' => 'web.customer.'
-], function () {
-    Route::resource('/', \App\Http\Controllers\Web\Customer\ProductController::class)->parameters([
-        '' => 'id?'
-    ]);;
-});

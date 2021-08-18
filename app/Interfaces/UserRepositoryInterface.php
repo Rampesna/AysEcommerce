@@ -18,14 +18,14 @@ interface UserRepositoryInterface
     public function show($id);
 
     /**
-     * @param \App\Http\Requests\UserStoreRequest $request
+     * @param \App\Http\Requests\User\StoreRequest $request
      */
-    public function store(\App\Http\Requests\UserStoreRequest $request);
+    public function store(\App\Http\Requests\User\StoreRequest $request);
 
     /**
-     * @param \App\Http\Requests\UserUpdateRequest $request
+     * @param \App\Http\Requests\User\UpdateRequest $request
      */
-    public function update(\App\Http\Requests\UserUpdateRequest $request);
+    public function update(\App\Http\Requests\User\UpdateRequest $request);
 
     /**
      * @param \App\Models\User $user

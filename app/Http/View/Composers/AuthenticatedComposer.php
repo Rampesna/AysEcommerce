@@ -7,7 +7,6 @@ use Illuminate\View\View;
 class AuthenticatedComposer
 {
     /**
-     *
      * @var object $authenticated
      */
     protected $authenticated;

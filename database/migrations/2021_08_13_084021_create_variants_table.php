@@ -18,8 +18,8 @@ class CreateVariantsTable extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->string('input_type');
-            $table->boolean('input_between');
-            $table->boolean('filterable');
+            $table->boolean('input_between')->default(0);
+            $table->boolean('filterable')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
