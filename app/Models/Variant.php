@@ -10,6 +10,11 @@ class Variant extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function options()
+    {
+        return $this->hasMany(VariantOption::class);
+    }
+
     public function products()
     {
         return $this->morphedByMany(Product::class, 'variant_relation');

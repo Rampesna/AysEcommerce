@@ -13,12 +13,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('sess', function () {
-    return session()->pull('cart');
+Route::get('get', function () {
+    $cart = session()->get('cart');
+
+//    $index = searchByValue($cart, 'id', 2);
+//
+//    $cart[$index]['quantity'] = 100;
+//
+//    session()->put('cart', $cart);
+
+    return $cart;
+});
+
+Route::get('set', function () {
+    session()->put('cart', [
+        [
+            'id' => 1,
+            'quantity' => 15
+        ],
+        [
+            'id' => 2,
+            'quantity' => 20
+        ],
+        [
+            'id' => 3,
+            'quantity' => 50
+        ]
+    ]);
+});
+
+Route::get('forget', function () {
+    session()->pull('cart');
 });
 
 Route::get('test', function () {
-    return bcrypt('123456');
+    return \App\Models\Product::find(1);
 });
 
 Route::get('relations', function () {

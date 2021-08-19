@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Option;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class CartComposer
@@ -15,7 +15,7 @@ class CartComposer
 
     public function __construct()
     {
-        $this->cart = auth()->check() ? auth()->user()->cart() : null;
+        $this->cart = auth()->check() ? auth()->user()->cart() : (Session::has('cart') ? Session::get('cart') : []);
     }
 
     /**

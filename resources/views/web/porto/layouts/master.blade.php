@@ -26,8 +26,11 @@
     <link rel="stylesheet" href="{{ asset('customer/porto/css/theme-elements.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/porto/css/theme-shop.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/porto/css/demos/demo-shop-6.css') }}">
+    <link rel="stylesheet" href="{{ asset('customer/porto/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('customer/porto/css/custom.css') }}">
 
-    @if (trim($__env->yieldContent('page-styles')))
+
+@if (trim($__env->yieldContent('page-styles')))
         @yield('page-styles')
     @endif
 
@@ -51,6 +54,8 @@
 
 <script src="{{ asset('customer/porto/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('customer/porto/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('customer/porto/js/toastr.min.js') }}"></script>
+<script src="{{ asset('customer/porto/js/custom.js') }}"></script>
 
 @if (trim($__env->yieldContent('page-script')))
     @yield('page-script')

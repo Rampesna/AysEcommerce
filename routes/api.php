@@ -45,4 +45,11 @@ Route::group([
         Route::any('update', [\App\Http\Controllers\Api\v1\ProductController::class, 'update'])->name('update');
         Route::any('delete', [\App\Http\Controllers\Api\v1\ProductController::class, 'destroy'])->name('destroy');
     });
+
+    Route::group([
+        'prefix' => 'product_variant_option',
+        'as' => 'product_variant_option.'
+    ], function () {
+        Route::any('check', [\App\Http\Controllers\Api\v1\ProductVariantOptionController::class, 'check'])->name('check');
+    });
 });

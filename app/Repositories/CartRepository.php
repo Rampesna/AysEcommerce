@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Http\Requests\Cart\AddToCartRequest;
 use App\Interfaces\CartRepositoryInterface;
+use App\Models\ProductVariantOption;
 use App\Traits\Response;
+use Illuminate\Support\Facades\Session;
 
 class CartRepository implements CartRepositoryInterface
 {
@@ -15,48 +17,39 @@ class CartRepository implements CartRepositoryInterface
      */
     public function addToCart(AddToCartRequest $request)
     {
-//        session()->pull('cart');
-//
-//        if (!session()->has('cart')) {
-//            session()->put('cart', null);
-//        }
-//
-//        $cart = session()->get('cart');
-//
-//        return $cart;
-//
-//        return $index = searchByValue($cart, 'id', intval($request->id));
-//
-//        if ($cart) {
-//            return $cart;
-//        } else {
-//            $cart = [
-//                [
-//                    'id' => intval($request->id),
-//                    'quantity' => intval($request->quantity)
-//                ]
-//            ];
-//        }
+        if (!Session::has('cart')) {
+            Session::put('cart', []);
+        }
 
-        return $cart;
-//
-//        return $index = searchByValue($cart, 'id', intval($request->id));
-//
-//        return [
-//            'cart' => $cart,
-//            'requested_id' => $request->id,
-//            'index' => $index
-//        ];
-//
-//        if ($index) {
-//            $cart[$index] = [
-//                'id' => intval($request->id),
-//                'quantity' => intval($cart[$index]['quantity']) + intval($request->quantity)
-//            ];
-//        } else {
-//
-//        }
-//        session()->put('cart', $cart);
-//        return session()->get('cart');
+        $cart = Session::get('cart');
+
+        if ((new ProductVariantOptionRepository)->check($request->id, $request->variants)) {
+
+        }
+
+        $variantOption = ProductVariantOption::with([]);
+
+        foreach ($request->variants as $variant) {
+            $variantOption->where('variant', 'like', '%~' . $variant . '~%');
+        }
+
+        if ($variantOption->first()) {
+            return $variantOption->first();
+        } else {
+            return 'yok';
+        }
+
+        $index = searchByValue($cart, 'variant_id', intval($request->id));
+
+        if ($index == -1) {
+            $cart[] = [
+                'variant_id' => intval($request->id),
+                'quantity' => intval($request->quantity)
+            ];
+        } else {
+            $cart[$index]['quantity'] += intval($request->quantity);
+        }
+
+        Session::put('cart', $cart);
     }
 }
