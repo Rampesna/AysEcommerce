@@ -2,54 +2,85 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\Cart\AddToCartRequest;
+use App\Http\Requests\Cart\StoreRequest;
+use App\Http\Requests\Cart\UpdateRequest;
 use App\Interfaces\CartRepositoryInterface;
-use App\Models\ProductVariantOption;
+use App\Models\Cart;
+use App\Models\Product;
 use App\Traits\Response;
-use Illuminate\Support\Facades\Session;
 
 class CartRepository implements CartRepositoryInterface
 {
     use Response;
 
     /**
-     * @param AddToCartRequest $request
+     * @param int $pageIndex
+     * @param int $pageSize
+     * @param string $orderBy
+     * @param string $orderType asc/desc
      */
-    public function addToCart(AddToCartRequest $request)
+    public function index(int $pageIndex = 0, int $pageSize = 10, string $orderBy = 'id', string $orderType = 'asc')
     {
-        if (!Session::has('cart')) {
-            Session::put('cart', []);
-        }
+        $carts = Cart::with([
+            'customer',
+            'items'
+        ])->skip($pageIndex * $pageSize)->take($pageSize)->orderBy($orderBy, $orderType)->get();
+        return $this->success($carts->count() > 0 ? 'Carts skipped ' . $pageIndex . ' and take ' . $pageSize : 'No records found', $carts);
+    }
 
-        $cart = Session::get('cart');
+    /**
+     * @param int $id
+     */
+    public function show($id)
+    {
+        $cart = Cart::with([
+            'customer',
+            'items'
+        ])->find($id);
+        if (!$cart) return $this->error('Cart not found', 404);
+        return $this->success('Cart informations', $cart);
+    }
 
-        if ((new ProductVariantOptionRepository)->check($request->id, $request->variants)) {
+    /**
+     * @param StoreRequest $request
+     */
+    public function store(StoreRequest $request)
+    {
+        return $this->success('Cart saved successfully', $this->save(
+            new Cart
+        ));
+    }
 
-        }
+    /**
+     * @param UpdateRequest $request
+     */
+    public function update(UpdateRequest $request)
+    {
+        if (!$cart = Cart::find($request->id)) return $this->error('Cart not found', 404);
+        return $this->success('Cart saved successfully', $this->save(
+            $cart
+        ));
+    }
 
-        $variantOption = ProductVariantOption::with([]);
+    /**
+     * @param Cart $cart
+     */
+    public function save(
+        Cart $cart
+    )
+    {
+        $cart->save();
 
-        foreach ($request->variants as $variant) {
-            $variantOption->where('variant', 'like', '%~' . $variant . '~%');
-        }
+        return $cart;
+    }
 
-        if ($variantOption->first()) {
-            return $variantOption->first();
-        } else {
-            return 'yok';
-        }
-
-        $index = searchByValue($cart, 'variant_id', intval($request->id));
-
-        if ($index == -1) {
-            $cart[] = [
-                'variant_id' => intval($request->id),
-                'quantity' => intval($request->quantity)
-            ];
-        } else {
-            $cart[$index]['quantity'] += intval($request->quantity);
-        }
-
-        Session::put('cart', $cart);
+    /**
+     * @param int $id
+     */
+    public function destroy($id)
+    {
+        if (!$cart = Cart::find($id)) return $this->error('Cart not found', 404);
+        $cart->delete();
+        return $this->success('Cart deleted', null);
     }
 }

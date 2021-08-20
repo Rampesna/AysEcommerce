@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface CartRepositoryInterface
+interface CartItemRepositoryInterface
 {
     /**
      * @param int $pageIndex
@@ -18,19 +18,19 @@ interface CartRepositoryInterface
     public function show($id);
 
     /**
-     * @param \App\Http\Requests\Cart\StoreRequest $request
+     * @param \App\Http\Requests\CartItem\StoreRequest $request
      */
-    public function store(\App\Http\Requests\Cart\StoreRequest $request);
+    public function store(\App\Http\Requests\CartItem\StoreRequest $request);
 
     /**
-     * @param \App\Http\Requests\Cart\UpdateRequest $request
+     * @param \App\Http\Requests\CartItem\UpdateRequest $request
      */
-    public function update(\App\Http\Requests\Cart\UpdateRequest $request);
+    public function update(\App\Http\Requests\CartItem\UpdateRequest $request);
 
     /**
-     * @param \App\Models\Cart $cart
+     * @param \App\Models\CartItem $cartItem
      */
-    public function save(\App\Models\Cart $cart);
+    public function save(\App\Models\CartItem $cartItem);
 
     /**
      * @param int $id

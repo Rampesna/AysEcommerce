@@ -36,7 +36,7 @@
 
                             <div class="product-detail-info">
                                 <div class="product-price-box">
-                                    <span class="old-price" id="productOldPrice"></span>
+                                    <span class="old-price" id="productOldPrice" style="display: none"></span>
                                     <span class="product-price" id="productPrice"></span>
                                 </div>
                             </div>
@@ -47,6 +47,7 @@
                                         <input type="number" class="form-control" value="1" id="quantity">
                                     </label>
                                 </div>
+                                <input type="hidden" id="productVariantOption">
                                 <button class="btn btn-sm btn-success text-white" id="addToCart">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Sepete Ekle</span>

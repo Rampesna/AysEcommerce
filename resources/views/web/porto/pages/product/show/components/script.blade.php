@@ -3,6 +3,8 @@
 
 <script>
 
+    var addToWishlist = $('#addToWishlist');
+    var productVariantOption = $('#productVariantOption');
     var productVariationOptions = $('#productVariationOptions');
 
     function check() {
@@ -24,12 +26,14 @@
                 variants: variants
             },
             success: function (response, statusText, xhr) {
+                productVariantOption.val(response.response.id);
                 $('#productPrice').html(`₺${parseFloat(response.response.price).toFixed(2)}`);
                 $('#addToCart').prop('disabled', false);
             },
             error: function (error) {
-                console.log(error.status)
-                console.log(error.response)
+                console.log(error.status);
+                console.log(error.response);
+                productVariantOption.val(null);
             }
         });
     }
@@ -42,6 +46,16 @@
                 id: '{{ $product->id }}'
             },
             success: function (response) {
+                $('#productImage').attr('src', response.response.images[0].url);
+                $('#productDescription').html(response.response.description);
+                $('#productDescriptionForTab').html(response.response.description);
+                if (response.response.discount) {
+                    $('#productOldPrice').html(`₺${parseFloat(response.response.price).toFixed(2)}`).show();
+                    $('#productPrice').html(`₺${parseFloat(response.response.price * (100 - response.response.discount) / 100).toFixed(2)}`).show();
+                } else {
+                    $('#productOldPrice').hide();
+                    $('#productPrice').html(`₺${parseFloat(response.response.price).toFixed(2)}`);
+                }
                 $.each(response.response.product_variant_options, function (variant) {
                     var optionsString = ``;
                     $.each(response.response.product_variant_options[variant].options, function (option) {
@@ -60,6 +74,7 @@
                     </div>
                     `);
                 });
+                check();
             },
             error: function (error) {
                 console.log(error)
@@ -71,5 +86,21 @@
 
     $(document).delegate('.variant', 'change', function () {
         check();
+    });
+
+    addToWishlist.click(function () {
+        $.ajax({
+            type: 'post',
+            url: '{{ route('web.addToCart') }}',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function () {
+
+            },
+            error: function () {
+
+            }
+        });
     });
 </script>

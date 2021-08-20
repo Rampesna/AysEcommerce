@@ -6,7 +6,6 @@ use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Interfaces\ProductRepositoryInterface;
 use App\Models\Product;
-use App\Models\User;
 use App\Traits\Response;
 
 class ProductRepository implements ProductRepositoryInterface
@@ -32,7 +31,9 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with([
+            'images'
+        ])->find($id);
         if (!$product) return $this->error('Product not found', 404);
         return $this->success('Product informations', $product);
     }
@@ -53,16 +54,13 @@ class ProductRepository implements ProductRepositoryInterface
     public function update(UpdateRequest $request)
     {
         if (!$product = Product::find($request->id)) return $this->error('Product not found', 404);
-        return $this->success('User saved successfully', $this->save(
+        return $this->success('Product saved successfully', $this->save(
             $product
         ));
     }
 
     /**
-     * @param User $user
-     * @param string $name
-     * @param string $email
-     * @param string $password
+     * @param Product $product
      */
     public function save(
         Product $product
@@ -78,7 +76,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function destroy($id)
     {
-        if (!$product = User::find($id)) return $this->error('Product not found', 404);
+        if (!$product = Product::find($id)) return $this->error('Product not found', 404);
         $product->delete();
         return $this->success('Product deleted', null);
     }

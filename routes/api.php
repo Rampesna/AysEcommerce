@@ -52,4 +52,27 @@ Route::group([
     ], function () {
         Route::any('check', [\App\Http\Controllers\Api\v1\ProductVariantOptionController::class, 'check'])->name('check');
     });
+
+    Route::group([
+        'prefix' => 'cart',
+        'as' => 'cart.'
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\CartController::class, 'index'])->name('index');
+        Route::any('show', [\App\Http\Controllers\Api\v1\CartController::class, 'show'])->name('show');
+        Route::any('store', [\App\Http\Controllers\Api\v1\CartController::class, 'store'])->name('store');
+        Route::any('update', [\App\Http\Controllers\Api\v1\CartController::class, 'update'])->name('update');
+        Route::any('delete', [\App\Http\Controllers\Api\v1\CartController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group([
+        'prefix' => 'cart_item',
+        'as' => 'cart_item.'
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\CartItemController::class, 'index'])->name('index');
+        Route::any('show', [\App\Http\Controllers\Api\v1\CartItemController::class, 'show'])->name('show');
+        Route::any('store', [\App\Http\Controllers\Api\v1\CartItemController::class, 'store'])->name('store');
+        Route::any('update', [\App\Http\Controllers\Api\v1\CartItemController::class, 'update'])->name('update');
+        Route::any('delete', [\App\Http\Controllers\Api\v1\CartItemController::class, 'destroy'])->name('destroy');
+    });
+
 });
