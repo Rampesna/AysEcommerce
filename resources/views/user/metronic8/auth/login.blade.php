@@ -49,7 +49,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '{{ route('authentication.store') }}',
+                url: '{{ route('api.v1.authentication.login') }}',
                 data: {
                     _token: '{{ csrf_token() }}',
                     email: $('#email').val(),
@@ -57,7 +57,7 @@
                     model: 'user'
                 },
                 success: function (response) {
-                    window.location.href = '{{ route('user.oauth.index') }}?token=' + response.response.token;
+                    window.location.href = '{{ route('oauth') }}?token=' + response.response.token + '&model=user';
                 },
                 error: function (error) {
                     console.log(error)

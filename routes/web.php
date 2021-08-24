@@ -46,20 +46,23 @@ Route::get('forget', function () {
     session()->pull('cart');
 });
 
-Route::get('test', function () {
-    return \App\Models\Product::find(1);
-});
-
-Route::get('relations', function () {
-    return \App\Models\Product::with([
-        'variantOptions',
-    ])->find(1);
-});
-
 Route::group([
     'as' => 'web.'
 ], function () {
+    Route::get('/login', [\App\Http\Controllers\Web\AuthenticationController::class, 'login'])->name('login');
+    Route::get('/logout', [\App\Http\Controllers\Web\AuthenticationController::class, 'logout'])->name('logout');
+
     Route::get('/', [\App\Http\Controllers\Web\ProductController::class, 'index'])->name('product.index');
-    Route::get('/{id?}', [\App\Http\Controllers\Web\ProductController::class, 'show'])->name('product.show');
-    Route::post('/addToCart', [\App\Http\Controllers\Web\CartController::class, 'addToCart'])->name('addToCart');
+    Route::get('/product/{id?}', [\App\Http\Controllers\Web\ProductController::class, 'show'])->name('product.show');
+
+    Route::group([
+        'prefix' => 'basket',
+        'as' => 'basket.'
+    ], function () {
+        Route::any('/index', [\App\Http\Controllers\Web\BasketController::class, 'index'])->name('index');
+        Route::any('/add', [\App\Http\Controllers\Web\BasketController::class, 'add'])->name('add')->middleware('csrf');
+        Route::any('/drop', [\App\Http\Controllers\Web\BasketController::class, 'drop'])->name('drop')->middleware('csrf');
+        Route::any('/remove', [\App\Http\Controllers\Web\BasketController::class, 'remove'])->name('remove')->middleware('csrf');
+        Route::any('/clear', [\App\Http\Controllers\Web\BasketController::class, 'clear'])->name('clear');
+    });
 });

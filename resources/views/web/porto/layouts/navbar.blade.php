@@ -4,7 +4,7 @@
             <nav>
                 <ul class="nav nav-pills" id="mainNav">
                     <li class="">
-                        <a class="" href="#">
+                        <a class="" href="{{ route('web.product.index') }}">
                             Anasayfa
                         </a>
                     </li>
@@ -16,26 +16,18 @@
                             <li>
                                 <div class="dropdown-mega-content dropdown-mega-content-small">
                                     <div class="row">
-                                        <div class="col-md-7">
+                                        <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <a href="#" class="dropdown-mega-sub-title">Kadın</a>
-                                                    <ul class="dropdown-mega-sub-nav">
-                                                        <li><a href="#">Üst Giyim</a></li>
-                                                        <li><a href="#">Aksesuar</a></li>
-                                                        <li><a href="#">Elbise</a></li>
-                                                        <li><a href="#">Ayakkabı & Bot</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <a href="#" class="dropdown-mega-sub-title">Erkek</a>
-                                                    <ul class="dropdown-mega-sub-nav">
-                                                        <li><a href="#">Aksesuar</a></li>
-                                                        <li><a href="#">Saat</a></li>
-                                                        <li><a href="#">Üst Gyiyim</a></li>
-                                                        <li><a href="#">Alt Giyim</a></li>
-                                                    </ul>
-                                                </div>
+                                                @foreach($categories as $category)
+                                                    <div class="col-md-4">
+                                                        <a href="#" class="dropdown-mega-sub-title">{{ $category->name }}</a>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            @foreach($category->subCategories as $subCategory)
+                                                                <li><a href="#">{{ $subCategory->name }}</a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

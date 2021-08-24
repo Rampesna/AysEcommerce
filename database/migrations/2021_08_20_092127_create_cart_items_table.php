@@ -18,6 +18,7 @@ class CreateCartItemsTable extends Migration
             $table->bigInteger('cart_id')->unsigned();
             $table->bigInteger('product_variant_option_id')->unsigned();
             $table->double('amount')->unsigned();
+            $table->double('price')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,21 +2,25 @@
 
 namespace App\Providers;
 
-use App\Interfaces\AuthenticationRepositoryInterface;
-use App\Interfaces\CartItemRepositoryInterface;
-use App\Interfaces\CartRepositoryInterface;
-use App\Interfaces\OAuthRepositoryInterface;
-use App\Interfaces\ProductRepositoryInterface;
-use App\Interfaces\ProductVariantOptionRepositoryInterface;
-use App\Interfaces\UserRepositoryInterface;
-use App\Repositories\AuthenticationRepository;
-use App\Repositories\CartItemRepository;
-use App\Repositories\CartRepository;
-use App\Repositories\OAuthRepository;
-use App\Repositories\ProductVariantOptionRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\ProductRepository;
+use App\Contracts\Customer\ICustomerProductVariantOptionRepository;
+use App\Repositories\Customer\CustomerProductVariantOptionRepository;
 use Illuminate\Support\ServiceProvider;
+
+use App\Contracts\Auth\IAuthenticationRepository;
+use App\Contracts\Auth\IOAuthRepository;
+use App\Contracts\Cart\ICartItemRepository;
+use App\Contracts\Cart\ICartRepository;
+use App\Contracts\Product\IProductRepository;
+use App\Contracts\Product\IProductVariantOptionRepository;
+use App\Contracts\User\IUserRepository;
+
+use App\Repositories\Auth\AuthenticationRepository;
+use App\Repositories\Auth\OAuthRepository;
+use App\Repositories\Cart\CartItemRepository;
+use App\Repositories\Cart\CartRepository;
+use App\Repositories\Product\ProductRepository;
+use App\Repositories\Product\ProductVariantOptionRepository;
+use App\Repositories\User\UserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -27,13 +31,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(AuthenticationRepositoryInterface::class, AuthenticationRepository::class);
-        $this->app->bind(OAuthRepositoryInterface::class, OAuthRepository::class);
-        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
-        $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
-        $this->app->bind(CartItemRepositoryInterface::class, CartItemRepository::class);
-        $this->app->bind(ProductVariantOptionRepositoryInterface::class, ProductVariantOptionRepository::class);
+        $this->app->bind(IAuthenticationRepository::class, AuthenticationRepository::class);
+        $this->app->bind(IOAuthRepository::class, OAuthRepository::class);
+        $this->app->bind(IUserRepository::class, UserRepository::class);
+        $this->app->bind(IProductRepository::class, ProductRepository::class);
+        $this->app->bind(ICartRepository::class, CartRepository::class);
+        $this->app->bind(ICartItemRepository::class, CartItemRepository::class);
+        $this->app->bind(IProductVariantOptionRepository::class, ProductVariantOptionRepository::class);
+        $this->app->bind(ICustomerProductVariantOptionRepository::class, CustomerProductVariantOptionRepository::class);
     }
 
     /**

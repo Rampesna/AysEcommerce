@@ -5,12 +5,12 @@
 
     var productsSelector = $('#products');
 
-    orderType.change(function () {
-        page_index = 0;
-        page_size = 12;
-        productsSelector.html('');
-        fetchProducts();
-    });
+    // orderType.change(function () {
+    //     page_index = 0;
+    //     page_size = 12;
+    //     productsSelector.html('');
+    //     fetchProducts();
+    // });
 
     function fetchProducts() {
         var showProductUrl = '{{ route('web.product.show') }}';
@@ -20,8 +20,13 @@
             data: {
                 page_index: page_index,
                 page_size: page_size,
-                order_by: orderType.val(),
-                order_type: orderType.find(':selected').data('order')
+                // order_by: orderType.val(),
+                // order_type: orderType.find(':selected').data('order'),
+                order_by: 'id',
+                order_type: 'desc',
+                // min_price: $('#minPrice').val(),
+                // max_price: $('#maxPrice').val(),
+                keyword: $('#keyword').val()
             },
             success: function (response) {
                 console.log(response)
@@ -47,16 +52,16 @@
                             </div>
                             <div class="product-price-box">
                             ${response.response[product].discount ?
-                                `<span class="old-price">
+                        `<span class="old-price">
                                    ₺${(response.response[product].price).toFixed(2)}
                                 </span>
                                 <span class="product-price">
                                    ₺${(response.response[product].price * (100 - response.response[product].discount) / 100).toFixed(2)}
                                 </span>` :
-                                `<span class="product-price">
+                        `<span class="product-price">
                                     ₺${(response.response[product].price).toFixed(2)}
                                 </span>`
-                                }
+                    }
                             </div>
                         </div>
                     </div>
@@ -79,7 +84,19 @@
         }
     });
 
-    $(document).delegate('.addToCart', 'click', function () {
+    // $('#minPrice, #maxPrice').on('focusout', function () {
+    //     page_index = 0;
+    //     page_size = 12;
+    //     productsSelector.html('');
+    //     fetchProducts();
+    // });
 
+    $('#keyword').on('keypress',function(e) {
+        if(e.which === 13) {
+            page_index = 0;
+            page_size = 12;
+            productsSelector.html('');
+            fetchProducts();
+        }
     });
 </script>

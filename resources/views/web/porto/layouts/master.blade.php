@@ -56,6 +56,7 @@
 <script src="{{ asset('customer/porto/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('customer/porto/js/toastr.min.js') }}"></script>
 <script src="{{ asset('customer/porto/js/custom.js') }}"></script>
+@include('web.porto.layouts.custom-scripts')
 
 @if (trim($__env->yieldContent('page-script')))
     @yield('page-script')

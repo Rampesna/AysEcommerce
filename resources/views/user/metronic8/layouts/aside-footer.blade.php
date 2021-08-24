@@ -30,7 +30,7 @@
             </div>
             <div class="separator mb-3 opacity-75"></div>
             <div class="menu-item px-3">
-                <a href="#" class="menu-link px-3 mb-2">
+                <a href="{{ route('user.logout') }}" class="menu-link px-3 mb-2">
                     <i class="fa fa-power-off me-2"></i>
                     <span>{{ __('user/aside.footer.quick-actions.logout') }}</span>
                 </a>

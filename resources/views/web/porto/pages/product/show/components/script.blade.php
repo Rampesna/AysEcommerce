@@ -4,11 +4,12 @@
 <script>
 
     var addToWishlist = $('#addToWishlist');
-    var productVariantOption = $('#productVariantOption');
+    var addToBasket = $('#addToBasket');
+    var productVariantOptionId = $('#product_variant_option_id');
     var productVariationOptions = $('#productVariationOptions');
 
     function check() {
-        $('#addToCart').prop('disabled', true);
+        addToBasket.prop('disabled', true);
         var product_id = '{{ $product->id }}';
         var variantOptions = $('.variant').find(':selected');
         var variants = [];
@@ -26,14 +27,14 @@
                 variants: variants
             },
             success: function (response, statusText, xhr) {
-                productVariantOption.val(response.response.id);
+                productVariantOptionId.val(response.response.id);
                 $('#productPrice').html(`₺${parseFloat(response.response.price).toFixed(2)}`);
-                $('#addToCart').prop('disabled', false);
+                addToBasket.prop('disabled', false);
             },
             error: function (error) {
                 console.log(error.status);
-                console.log(error.response);
-                productVariantOption.val(null);
+                console.log(error);
+                productVariantOptionId.val(null);
             }
         });
     }
@@ -46,7 +47,8 @@
                 id: '{{ $product->id }}'
             },
             success: function (response) {
-                $('#productImage').attr('src', response.response.images[0].url);
+                var baseAsset = '{{ asset('') }}';
+                $('#productImage').attr('src', baseAsset + response.response.images[0].url);
                 $('#productDescription').html(response.response.description);
                 $('#productDescriptionForTab').html(response.response.description);
                 if (response.response.discount) {
@@ -88,19 +90,50 @@
         check();
     });
 
-    addToWishlist.click(function () {
-        $.ajax({
-            type: 'post',
-            url: '{{ route('web.addToCart') }}',
-            data: {
-                _token: '{{ csrf_token() }}',
-            },
-            success: function () {
+    addToBasket.click(function () {
+        var product_variant_option_id = productVariantOptionId.val();
 
-            },
-            error: function () {
-
-            }
-        });
+        if (product_variant_option_id == null || product_variant_option_id === '') {
+            toastr.warning('Stokta olmayan ürün sepete eklenemez!');
+        } else {
+            @if(auth()->guard('customer')->check())
+            $.ajax({
+                type: 'post',
+                url: '{{ route('api.v1.basket.add') }}',
+                headers: {
+                    _token: '{{ auth()->guard('customer')->user()->token() }}'
+                },
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_variant_option_id: productVariantOptionId.val()
+                },
+                success: function (response) {
+                    toastr.success('Sepet güncellendi!');
+                    getBasket();
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+            @else
+            $.ajax({
+                type: 'post',
+                url: '{{ route('web.basket.add') }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_variant_option_id: productVariantOptionId.val()
+                },
+                success: function (response) {
+                    toastr.success('Sepet güncellendi!');
+                    getBasket();
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+            @endif
+        }
     });
+
+
 </script>

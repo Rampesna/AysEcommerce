@@ -4,7 +4,6 @@
 
     <div class="container mt-lg">
         <div class="row">
-            @include('web.porto.layouts.aside')
             @include('web.porto.layouts.products')
         </div>
     </div>

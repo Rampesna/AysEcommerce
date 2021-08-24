@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Option;
+use App\Models\Option\Option;
 use Illuminate\View\View;
 
 class OptionsComposer

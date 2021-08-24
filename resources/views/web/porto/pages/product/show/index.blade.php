@@ -42,13 +42,7 @@
                             </div>
 
                             <div class="product-actions">
-                                <div class="product-detail-qty">
-                                    <label>
-                                        <input type="number" class="form-control" value="1" id="quantity">
-                                    </label>
-                                </div>
-                                <input type="hidden" id="productVariantOption">
-                                <button class="btn btn-sm btn-success text-white" id="addToCart">
+                                <button class="btn btn-sm btn-success text-white" id="addToBasket">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Sepete Ekle</span>
                                 </button>
@@ -57,6 +51,7 @@
                                         <i class="fa fa-heart"></i>
                                     </a>
                                 </div>
+                                <input type="hidden" id="product_variant_option_id">
                             </div>
 
                             <div class="product-share-box">

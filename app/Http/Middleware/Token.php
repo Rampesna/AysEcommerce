@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Customer;
-use App\Models\User;
+use App\Models\Customer\Customer;
+use App\Models\User\User;
 use App\Traits\Response;
 use Closure;
 use Illuminate\Http\Request;
@@ -25,7 +25,7 @@ class Token
             return $this->error('_token is required on header');
         }
 
-        $checked = null;
+        $checked = false;
 
         if ($model) {
             if (ucwords($model) == 'User') {
