@@ -2,6 +2,7 @@
 
 namespace App\Models\Category;
 
+use App\Models\Product\Product;
 use App\Models\Variant\Variant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,5 +38,10 @@ class Category extends Model
     public function variants()
     {
         return $this->morphToMany(Variant::class, 'variant_relation');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 }

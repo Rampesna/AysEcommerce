@@ -20,10 +20,10 @@
                                             <div class="row">
                                                 @foreach($categories as $category)
                                                     <div class="col-md-4">
-                                                        <a href="#" class="dropdown-mega-sub-title">{{ $category->name }}</a>
+                                                        <a href="{{ route('web.product.search', ['category_id' => $category->id]) }}" class="dropdown-mega-sub-title">{{ $category->name }}</a>
                                                         <ul class="dropdown-mega-sub-nav">
                                                             @foreach($category->subCategories as $subCategory)
-                                                                <li><a href="#">{{ $subCategory->name }}</a></li>
+                                                                <li><a href="{{ route('web.product.search', ['category_id' => $subCategory->id]) }}">{{ $subCategory->name }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     </div>

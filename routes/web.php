@@ -13,39 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('get', function () {
-    $cart = session()->get('cart');
-
-//    $index = searchByValue($cart, 'id', 2);
-//
-//    $cart[$index]['quantity'] = 100;
-//
-//    session()->put('cart', $cart);
-
-    return $cart;
-});
-
-Route::get('set', function () {
-    session()->put('cart', [
-        [
-            'id' => 1,
-            'quantity' => 15
-        ],
-        [
-            'id' => 2,
-            'quantity' => 20
-        ],
-        [
-            'id' => 3,
-            'quantity' => 50
-        ]
-    ]);
-});
-
-Route::get('forget', function () {
-    session()->pull('cart');
-});
-
 Route::group([
     'as' => 'web.'
 ], function () {
@@ -53,6 +20,7 @@ Route::group([
     Route::get('/logout', [\App\Http\Controllers\Web\AuthenticationController::class, 'logout'])->name('logout');
 
     Route::get('/', [\App\Http\Controllers\Web\ProductController::class, 'index'])->name('product.index');
+    Route::get('/search', [\App\Http\Controllers\Web\ProductController::class, 'search'])->name('product.search');
     Route::get('/product/{id?}', [\App\Http\Controllers\Web\ProductController::class, 'show'])->name('product.show');
 
     Route::group([

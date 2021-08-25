@@ -23,10 +23,11 @@
                 order_by: orderType.val(),
                 order_type: orderType.find(':selected').data('order'),
                 min_price: $('#minPrice').val(),
-                max_price: $('#maxPrice').val()
+                max_price: $('#maxPrice').val(),
+                keyword: '{{ $keyword }}',
+                category_id: '{{ $categoryId ?? null }}'
             },
             success: function (response) {
-                console.log(response)
                 $.each(response.response, function (product) {
                     productsSelector.append(`
                 <li>
@@ -81,10 +82,12 @@
         }
     });
 
-    $('#minPrice, #maxPrice').on('focusout', function () {
-        page_index = 0;
-        page_size = 12;
-        productsSelector.html('');
-        fetchProducts();
+    $('#minPrice, #maxPrice').on('keypress', function (e) {
+        if (e.keyCode === 13) {
+            page_index = 0;
+            page_size = 12;
+            productsSelector.html('');
+            fetchProducts();
+        }
     });
 </script>

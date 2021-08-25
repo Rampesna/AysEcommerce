@@ -51,7 +51,7 @@
     <div class="footer-copyright">
         <div class="container">
             <a href="#" class="logo">
-                <img alt="Porto Website Template" class="img-responsive" src="{{ asset('customer/porto/img/demos/shop/logo-footer.png') }}">
+                <img alt="Porto Website Template" class="img-responsive" src="{{ asset('customer/porto/img/demos/shop/logo-white.png') }}" style="height: 35px; width: auto">
             </a>
             <img alt="Payments" src="{{ asset('customer/porto/img/demos/shop/payments.png') }}" class="footer-payment">
             <p class="copyright-text">© {{ config('app.name') }} 2021. All Rights Reserved.</p>

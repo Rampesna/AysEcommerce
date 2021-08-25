@@ -5,6 +5,7 @@ namespace App\Repositories\Product;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Contracts\Product\IProductRepository;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Traits\Response;
 
@@ -23,6 +24,17 @@ class ProductRepository implements IProductRepository
         $products = Product::with([
             'images'
         ]);
+
+        if (!empty($params['category_id'])) {
+            $ids = [];
+            $category = Category::find($params['category_id']);
+            $ids = array_merge($ids, $category->products->pluck('id')->toArray());
+            while ($category->category_id) {
+                $category = Category::find($category->category_id);
+                $ids = array_merge($ids, $category->products->pluck('id')->toArray());
+            }
+            $products->whereIn('id', array_unique($ids));
+        }
 
         if (!empty($params['min_price'])) {
             $products->where('price', '>=', $params['min_price']);

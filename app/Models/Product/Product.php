@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Category\Category;
 use App\Models\Image\Image;
 use App\Models\Variant\Variant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,6 +44,11 @@ class Product extends Model
     public function variantOptions()
     {
         return $this->hasMany(ProductVariantOption::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     public function getProductVariantOptionsAttribute()

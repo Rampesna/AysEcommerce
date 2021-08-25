@@ -37,12 +37,13 @@
                 </div>
 
                 <div class="header-search">
-                    <a href="#" class="search-toggle"><i class="fa fa-search"></i></a>
-                    <div class="header-search-wrapper">
-                        <label for="keyword"></label>
-                        <input type="text" class="form-control" id="keyword" placeholder="Arayın...">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                    </div>
+                    <form action="{{ route('web.product.search') }}" method="get">
+                        <div class="header-search-wrapper">
+                            <label for="keyword"></label>
+                            <input type="text" class="form-control" autocomplete="off" id="keyword" name="keyword" value="{{ $keyword ?? '' }}" placeholder="Arayın...">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
                 </div>
 
                 <a href="#" class="mmenu-toggle-btn" title="Toggle menu">

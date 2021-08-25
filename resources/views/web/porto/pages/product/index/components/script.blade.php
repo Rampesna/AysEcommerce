@@ -26,7 +26,7 @@
                 order_type: 'desc',
                 // min_price: $('#minPrice').val(),
                 // max_price: $('#maxPrice').val(),
-                keyword: $('#keyword').val()
+                // keyword: $('#keyword').val()
             },
             success: function (response) {
                 console.log(response)
@@ -91,12 +91,12 @@
     //     fetchProducts();
     // });
 
-    $('#keyword').on('keypress',function(e) {
-        if(e.which === 13) {
-            page_index = 0;
-            page_size = 12;
-            productsSelector.html('');
-            fetchProducts();
-        }
-    });
+    // $('#keyword').on('keypress',function(e) {
+    //     if(e.which === 13) {
+    //         page_index = 0;
+    //         page_size = 12;
+    //         productsSelector.html('');
+    //         fetchProducts();
+    //     }
+    // });
 </script>

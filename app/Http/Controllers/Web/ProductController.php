@@ -19,24 +19,16 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function create()
+    public function search(Request $request)
     {
-        abort(404);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        abort(404);
+        return view('web.porto.pages.product.search.index', [
+            'keyword' => $request->keyword,
+            'categoryId' => $request->category_id
+        ]);
     }
 
     /**
@@ -52,39 +44,5 @@ class ProductController extends Controller
         return view('web.porto.pages.product.show.index', [
             'product' => $product
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        abort(404);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        abort(404);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        abort(404);
     }
 }
