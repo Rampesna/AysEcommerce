@@ -47,6 +47,13 @@ Route::group([
     });
 
     Route::group([
+        'prefix' => 'variant',
+        'as' => 'variant.'
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\Variant\VariantController::class, 'index'])->name('index');
+    });
+
+    Route::group([
         'prefix' => 'product_variant_option',
         'as' => 'product_variant_option.'
     ], function () {
@@ -83,6 +90,13 @@ Route::group([
         Route::any('add', [\App\Http\Controllers\Api\v1\Basket\BasketController::class, 'add'])->name('add');
         Route::any('drop', [\App\Http\Controllers\Api\v1\Basket\BasketController::class, 'drop'])->name('drop');
         Route::any('remove', [\App\Http\Controllers\Api\v1\Basket\BasketController::class, 'remove'])->name('remove');
+    });
+
+    Route::group([
+        'prefix' => 'category',
+        'as' => 'category.',
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\Category\CategoryController::class, 'index'])->name('index');
     });
 
 });

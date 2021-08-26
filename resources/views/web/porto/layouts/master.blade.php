@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('customer/porto/css/theme-shop.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/porto/css/demos/demo-shop-6.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/porto/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('customer/porto/css/selectpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('customer/porto/css/custom.css') }}">
 
 
@@ -55,6 +56,7 @@
 <script src="{{ asset('customer/porto/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('customer/porto/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('customer/porto/js/toastr.min.js') }}"></script>
+<script src="{{ asset('customer/porto/js/selectpicker.min.js') }}"></script>
 <script src="{{ asset('customer/porto/js/custom.js') }}"></script>
 @include('web.porto.layouts.custom-scripts')
 

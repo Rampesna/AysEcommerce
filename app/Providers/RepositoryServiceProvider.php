@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Contracts\Category\ICategoryRepository;
 use App\Contracts\Customer\ICustomerProductVariantOptionRepository;
+use App\Contracts\Variant\IVariantRepository;
+use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Customer\CustomerProductVariantOptionRepository;
+use App\Repositories\Variant\VariantRepository;
 use Illuminate\Support\ServiceProvider;
 
 use App\Contracts\Auth\IAuthenticationRepository;
@@ -39,6 +43,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ICartItemRepository::class, CartItemRepository::class);
         $this->app->bind(IProductVariantOptionRepository::class, ProductVariantOptionRepository::class);
         $this->app->bind(ICustomerProductVariantOptionRepository::class, CustomerProductVariantOptionRepository::class);
+        $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
+        $this->app->bind(IVariantRepository::class, VariantRepository::class);
     }
 
     /**

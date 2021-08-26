@@ -25,12 +25,10 @@ class ProductRepository implements IProductRepository
             'images'
         ]);
 
-        if (!empty($params['category_id'])) {
+        if (!empty($params['categories'])) {
             $ids = [];
-            $category = Category::find($params['category_id']);
-            $ids = array_merge($ids, $category->products->pluck('id')->toArray());
-            while ($category->category_id) {
-                $category = Category::find($category->category_id);
+            $categories = Category::whereIn('id', $params['categories'])->get();
+            foreach ($categories as $category) {
                 $ids = array_merge($ids, $category->products->pluck('id')->toArray());
             }
             $products->whereIn('id', array_unique($ids));

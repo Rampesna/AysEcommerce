@@ -29,5 +29,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
+                        Kategoriler
+                    </a>
+                </h4>
+            </div>
+            <div id="panel-filter-category" class="accordion-body collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="categories"></label>
+                                <select id="categories" class="form-control text-white selectpicker" data-live-search="true" multiple>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="filterableVariants" style="margin-top: 1.25rem">
+
+        </div>
+
     </div>
 </aside>

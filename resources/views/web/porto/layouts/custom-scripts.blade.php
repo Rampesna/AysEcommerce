@@ -56,7 +56,6 @@
             url: '{{ route('web.basket.index') }}',
             data: {},
             success: function (response) {
-                console.log(response.response)
                 var basketProducts = $('#basketProducts');
                 var basketProductsQuantities = $('#basketProductsQuantities');
                 var basketProductsTotalPrice = $('#basketProductsTotalPrice');
@@ -116,7 +115,7 @@
                 _token: '{{ csrf_token() }}',
                 product_variant_option_id: product_variant_option_id
             },
-            success: function (response) {
+            success: function () {
                 toastr.success('Sepet güncellendi!');
                 getBasket();
             },
