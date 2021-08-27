@@ -33,4 +33,38 @@ Route::group([
         Route::any('/remove', [\App\Http\Controllers\Web\BasketController::class, 'remove'])->name('remove')->middleware('csrf');
         Route::any('/clear', [\App\Http\Controllers\Web\BasketController::class, 'clear'])->name('clear');
     });
+
+    Route::group([
+        'prefix' => 'customer',
+        'as' => 'customer.',
+        'middleware' => 'auth:customer'
+    ], function () {
+        Route::group([
+            'as' => 'index.'
+        ], function () {
+            Route::any('/index', [\App\Http\Controllers\Web\Customer\IndexController::class, 'index'])->name('index');
+        });
+
+        Route::group([
+            'prefix' => 'address',
+            'as' => 'address.'
+        ], function () {
+            Route::any('/index', [\App\Http\Controllers\Web\Customer\AddressController::class, 'index'])->name('index');
+        });
+
+        Route::group([
+            'prefix' => 'order',
+            'as' => 'order.'
+        ], function () {
+            Route::any('/index', [\App\Http\Controllers\Web\Customer\OrderController::class, 'index'])->name('index');
+        });
+    });
+
+    Route::group([
+        'prefix' => 'cart',
+        'as' => 'cart.',
+        'middleware' => 'auth:customer'
+    ], function () {
+        Route::any('/create', [\App\Http\Controllers\Web\CartController::class, 'create'])->name('create');
+    });
 });

@@ -13,6 +13,9 @@
                     </li>
                 @else
                     <li>
+                        <a href="{{ route('web.customer.index.index') }}">HESABIM</a>
+                    </li>
+                    <li>
                         <a href="{{ route('web.logout') }}">ÇIKIŞ YAP</a>
                     </li>
                 @endif

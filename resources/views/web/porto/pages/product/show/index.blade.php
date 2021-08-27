@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="product-actions">
-                                <button class="btn btn-sm btn-success text-white" id="addToBasket">
+                                <button class="btn btn-sm btn-success text-white" id="addToBasket" style="display: none">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Sepete Ekle</span>
                                 </button>

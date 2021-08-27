@@ -7,6 +7,7 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Contracts\Product\IProductRepository;
 use App\Models\Category\Category;
 use App\Models\Product\Product;
+use App\Models\Product\ProductVariantOption;
 use App\Traits\Response;
 
 class ProductRepository implements IProductRepository
@@ -32,6 +33,15 @@ class ProductRepository implements IProductRepository
                 $ids = array_merge($ids, $category->products->pluck('id')->toArray());
             }
             $products->whereIn('id', array_unique($ids));
+        }
+
+        if (!empty($params['variants'])) {
+            $productVariantOptions = ProductVariantOption::with([]);
+            foreach ($params['variants'] as $variant) {
+                $productVariantOptions->orWhere('variant', 'like', '%~' . $variant . '~%');
+            }
+            $productVariantOptions = $productVariantOptions->pluck('product_id')->toArray();
+            $products->whereIn('id', $productVariantOptions);
         }
 
         if (!empty($params['min_price'])) {

@@ -29,7 +29,7 @@
 
                                 <div class="cart-actions">
                                     <a href="#" class="btn btn-warning">İncele</a>
-                                    <a href="#" class="btn btn-info">Tamamla</a>
+                                    <a href="{{ route('web.cart.create') }}" class="btn btn-info">Tamamla</a>
                                 </div>
                             </div>
                         </div>

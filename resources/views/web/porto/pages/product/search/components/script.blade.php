@@ -40,28 +40,33 @@
                 $.each(response.response, function (variant) {
                     var inputString = ``;
                     if (response.response[variant].input_type === 'select') {
-                        inputString += `
-                        <div class="form-group">
-                            <label for="variant_${response.response[variant].id}"></label>
-                            <select id="variant_${response.response[variant].id}" class="form-control text-white selectpicker" data-live-search="true" multiple>
-                                ${$.map(response.response[variant].options, function (option) { return `<option value="${option.id}">${option.name}</option>`; })}
-                            </select>
-                        </div>
-                        `;
+                        $.each(response.response[variant].options, function (option) {
+                            inputString += `
+                            <div class="checkbox">
+                                <label>
+                                    <input class="variant" type="checkbox" value="${response.response[variant].options[option].name}">
+                                        <span class="cr">
+                                            <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                        </span>
+                                        ${response.response[variant].options[option].name}
+                                </label>
+                            </div>
+                            `;
+                        });
                     }
                     filterableVariants.append(`
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-${response.response[variant].id}">
                                     ${response.response[variant].name}
                                 </a>
                             </h4>
                         </div>
-                        <div id="panel-filter-category" class="accordion-body collapse in">
+                        <div id="panel-filter-${response.response[variant].id}" class="accordion-body collapse in">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-xl-12">
                                         ${inputString}
                                     </div>
                                 </div>
@@ -80,7 +85,11 @@
     function fetchProducts() {
         var categories = categoriesSelector.val();
 
-        console.log(categories)
+        checkedVariants = $(document).find('.variant:checked');
+        var variants = [];
+        $.each(checkedVariants, function () {
+            variants.push($(this).val());
+        });
 
         var keyword = '{{ $keyword }}';
         var order_by = orderType.val();
@@ -99,7 +108,8 @@
                 min_price: min_price,
                 max_price: max_price,
                 keyword: keyword,
-                categories: categories
+                categories: categories,
+                variants: variants
             },
             success: function (response) {
                 console.log(response)
@@ -180,5 +190,12 @@
             productsSelector.html('');
             fetchProducts();
         }
+    });
+
+    $(document).delegate('.variant', 'click', function () {
+        page_index = 0;
+        page_size = 12;
+        productsSelector.html('');
+        fetchProducts();
     });
 </script>

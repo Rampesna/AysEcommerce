@@ -39,7 +39,8 @@ class ProductController extends Controller
                 'min_price' => $request->min_price,
                 'max_price' => $request->max_price,
                 'keyword' => $request->keyword,
-                'categories' => $request->categories
+                'categories' => $request->categories,
+                'variants' => $request->variants
             ]
         );
     }

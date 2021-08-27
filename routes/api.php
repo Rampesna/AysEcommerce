@@ -19,6 +19,7 @@ Route::group([
     'as' => 'api.v1.',
 ], function () {
     Route::group([
+        'prefix' => 'authentication',
         'as' => 'authentication.',
     ], function () {
         Route::any('login', [\App\Http\Controllers\Api\v1\Auth\AuthenticationController::class, 'login'])->name('login');
@@ -33,6 +34,13 @@ Route::group([
         Route::any('store', [\App\Http\Controllers\Api\v1\User\UserController::class, 'store'])->name('store');
         Route::any('update', [\App\Http\Controllers\Api\v1\User\UserController::class, 'update'])->name('update');
         Route::any('delete', [\App\Http\Controllers\Api\v1\User\UserController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group([
+        'prefix' => 'category',
+        'as' => 'category.',
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\Category\CategoryController::class, 'index'])->name('index');
     });
 
     Route::group([
@@ -93,10 +101,13 @@ Route::group([
     });
 
     Route::group([
-        'prefix' => 'category',
-        'as' => 'category.',
+        'prefix' => 'payment',
+        'as' => 'payment.'
     ], function () {
-        Route::any('index', [\App\Http\Controllers\Api\v1\Category\CategoryController::class, 'index'])->name('index');
+        Route::any('index', [\App\Http\Controllers\Api\v1\Product\ProductController::class, 'index'])->name('index');
+        Route::any('show', [\App\Http\Controllers\Api\v1\Product\ProductController::class, 'show'])->name('show');
+        Route::any('store', [\App\Http\Controllers\Api\v1\Product\ProductController::class, 'store'])->name('store');
+        Route::any('update', [\App\Http\Controllers\Api\v1\Product\ProductController::class, 'update'])->name('update');
+        Route::any('delete', [\App\Http\Controllers\Api\v1\Product\ProductController::class, 'destroy'])->name('destroy');
     });
-
 });

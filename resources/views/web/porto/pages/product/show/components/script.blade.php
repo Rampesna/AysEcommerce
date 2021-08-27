@@ -9,7 +9,7 @@
     var productVariationOptions = $('#productVariationOptions');
 
     function check() {
-        addToBasket.prop('disabled', true);
+        addToBasket.hide();
         var product_id = '{{ $product->id }}';
         var variantOptions = $('.variant').find(':selected');
         var variants = [];
@@ -29,7 +29,7 @@
             success: function (response, statusText, xhr) {
                 productVariantOptionId.val(response.response.id);
                 $('#productPrice').html(`₺${parseFloat(response.response.price).toFixed(2)}`);
-                addToBasket.prop('disabled', false);
+                addToBasket.show();
             },
             error: function (error) {
                 console.log(error.status);
@@ -61,7 +61,7 @@
                 $.each(response.response.product_variant_options, function (variant) {
                     var optionsString = ``;
                     $.each(response.response.product_variant_options[variant].options, function (option) {
-                        optionsString = optionsString + `<option value="${response.response.product_variant_options[variant].options[option].id}">${response.response.product_variant_options[variant].options[option].name}</option>`;
+                        optionsString += `<option value="${response.response.product_variant_options[variant].options[option].id}">${response.response.product_variant_options[variant].options[option].name}</option>`;
                     });
                     productVariationOptions.append(`
                     <div class="col-xl-12">
