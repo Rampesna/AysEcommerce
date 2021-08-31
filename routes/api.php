@@ -37,6 +37,17 @@ Route::group([
     });
 
     Route::group([
+        'prefix' => 'customer',
+        'as' => 'customer.'
+    ], function () {
+        Route::any('index', [\App\Http\Controllers\Api\v1\Customer\CustomerController::class, 'index'])->name('index');
+        Route::any('show', [\App\Http\Controllers\Api\v1\Customer\CustomerController::class, 'show'])->name('show');
+        Route::any('store', [\App\Http\Controllers\Api\v1\Customer\CustomerController::class, 'store'])->name('store');
+        Route::any('update', [\App\Http\Controllers\Api\v1\Customer\CustomerController::class, 'update'])->name('update');
+        Route::any('delete', [\App\Http\Controllers\Api\v1\Customer\CustomerController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group([
         'prefix' => 'category',
         'as' => 'category.',
     ], function () {
